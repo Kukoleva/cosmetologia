@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'self'; connect-src 'self'; frame-src 'self' https://www.google.com; manifest-src 'self'; script-src 'self' 'nonce-abc123'; style-src 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; object-src 'none';">
+    <meta name="theme-color" content="#411B42">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Оценка кожи по фото онлайн — Beauty Studio</title>
+    <meta name="description" content="Определите тип кожи по фото: сухая, жирная или комбинированная. Онлайн-тест с рекомендациями косметолога Beauty Studio в Гомеле. Это демо-сервис без загрузки фото на сервер.">
+    <link rel="canonical" href="https://kukoleva.github.io/cosmetologia/skin-test.html">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Оценка кожи по фото — Beauty Studio">
+    <meta property="og:description" content="Определите свой тип кожи по фото и получите персональные рекомендации.">
+    <meta property="og:url" content="https://kukoleva.github.io/cosmetologia/skin-test.html">
+    <meta property="og:image" content="https://kukoleva.github.io/cosmetologia/images/IMG_logo.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Karla:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script nonce="abc123" defer src="js/main.js"></script>
+    <script nonce="abc123" defer src="js/skin-analysis.js"></script>
+    <script type="application/ld+json" nonce="abc123">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Beauty Studio",
+      "url": "https://kukoleva.github.io/cosmetologia/",
+      "description": "Студия эстетической косметологии в Гомеле"
+    }
+    </script>
+    <script type="application/ld+json" nonce="abc123">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://kukoleva.github.io/cosmetologia/" },
+        { "@type": "ListItem", "position": 2, "name": "Оценка кожи", "item": "https://kukoleva.github.io/cosmetologia/skin-test.html" }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo" aria-label="Beauty Studio — на главную"><span class="logo__tag">Beauty Studio</span></a>
+        <nav class="nav" id="nav" aria-label="Главное меню">
+            <a href="index.html">Главная</a>
+            <a href="services.html">Услуги</a>
+            <a href="skin-test.html" class="active">Оценка кожи</a>
+            <a href="contacts.html">Контакты</a>
+        </nav>
+        <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+        <button class="cta-btn" type="button" data-call aria-label="Записаться">📞 Записаться</button>
+        <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    </header>
+
+    <main id="top">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <div class="container">
+                <ol>
+                    <li><a href="index.html">Главная</a></li>
+                    <li aria-current="page">Оценка кожи</li>
+                </ol>
+            </div>
+        </nav>
+
+        <section class="page-hero">
+            <h1>Оценка кожи по фото</h1>
+            <p>Загрузите фото лица — определим ваш тип кожи и подберём подходящие процедуры.</p>
+        </section>
+
+        <section class="skin-test">
+            <p class="skin-test__intro">Это демонстрационный сервис: фото не загружается на сервер, вся обработка происходит в браузере.</p>
+
+            <form id="skinTestForm" novalidate>
+                <label class="dropzone" id="dropzone">
+                    <input type="file" id="skinPhoto" name="photo" accept="image/*">
+                    <span class="dropzone__icon" aria-hidden="true">📷</span>
+                    <span class="dropzone__title">Выберите или перетащите фото лица</span>
+                    <span class="dropzone__hint">JPG, PNG или WebP</span>
+                </label>
+                <div class="preview" id="preview">
+                    <img id="previewImg" alt="Предпросмотр загруженного фото">
+                    <p class="preview__caption">Фото загружено</p>
+                </div>
+
+                <div class="center mt-32">
+                    <button class="btn btn--primary" id="analyzeBtn" type="button" disabled>🎯 Анализировать</button>
+                </div>
+
+                <div class="progress" id="progress" aria-live="polite">
+                    <div class="progress__bar"><div class="progress__fill" id="progressFill"></div></div>
+                    <p class="progress__label" id="progressLabel">Подготовка…</p>
+                </div>
+
+                <div class="result" id="result" aria-live="polite">
+                    <div class="result__card">
+                        <p class="result__type" id="resultType"></p>
+                        <p class="result__sub" id="resultDesc"></p>
+                        <div class="condition" id="resultCondition"></div>
+                        <h2 class="visually-hidden">Рекомендации</h2>
+                        <ul class="result__list" id="resultList"></ul>
+                        <div class="result__actions">
+                            <a class="btn btn--primary" href="contacts.html">Записаться →</a>
+                            <button class="btn btn--outline" id="restartBtn" type="button">Пройти ещё раз</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <p class="skin-test__disclaimer">Это демонстрационный сервис: анализ имитируется на стороне браузера, фотография не загружается на сервер. Для точной диагностики запишитесь на консультацию косметолога.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p class="footer__title">Beauty Studio</p>
+            <p class="footer__address">г. Гомель, площадь Привокзальная 1, гостиница «Гомель», 7 этаж, каб. 716</p>
+            <nav class="socials" aria-label="Социальные сети">
+                <a href="https://t.me/kukoleva_cosmetology/" class="socials__link" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
+                <a href="https://wa.me/375291770822" class="socials__link" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+                <a href="https://instagram.com/kukoleva_cosmetology/" class="socials__link" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+                <a href="https://www.tiktok.com/@kukoleva_cosmetology" class="socials__link" target="_blank" rel="noopener" aria-label="tiktok">tiktok</a>
+            </nav>
+            <p class="footer__copy">© 2026 Beauty Studio. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="callModal" role="dialog" aria-labelledby="modal-title" aria-modal="true" aria-hidden="true">
+        <div class="modal__content" role="document">
+            <span id="modal-title" class="modal__title">Записаться</span>
+            <a class="modal__link only-mobile" href="tel:+375291770822">📞 Позвонить</a>
+            <a class="modal__link only-mobile" href="https://wa.me/375291770822" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="modal__link only-mobile" href="https://t.me/kukoleva_cosmetology/" target="_blank" rel="noopener">✈️ Telegram</a>
+            <a class="modal__link only-desktop" href="https://instagram.com/kukoleva_cosmetology/" target="_blank" rel="noopener">📸 Instagram</a>
+            <a class="modal__link only-desktop" href="https://www.tiktok.com/@kukoleva_cosmetology" target="_blank" rel="noopener">🌐 TikTok</a>
+            <button class="modal__close" type="button">Закрыть</button>
+        </div>
+    </div>
+</body>
+</html>
